@@ -1,2 +1,1 @@
-© 
-2025 Aarush Narang. All rights reserved.
+© 2025 Aarush Narang. All rights reserved.
