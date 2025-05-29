@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<header id="home">
+    <div class="hero-content">
+        <h1>Hi, I'm <span>Alex Morgan</span></h1>
+        <p>Frontend Developer & UI Designer</p>
+        <a href="#projects" class="btn">View My Work</a>
+    </div>
+</header>
+
+<!-- About Section -->
+<section id="about" class="section">
+    <h2>About Me</h2>
+    <div class="about-container">
+        <img src="assets/images/profile.jpg" alt="Profile Picture" class="profile-img">
+        <div class="about-text">
+            <p>I'm a passionate web developer with 3 years of experience creating responsive websites. My skills include HTML, CSS, JavaScript, and React.</p>
+            <div class="skills">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>JavaScript</span>
+                <span>React</span>
+                <span>Git</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="section">
+    <h2>My Projects</h2>
+    <div class="projects-grid">
+        <div class="project-card">
+            <img src="assets/images/project1.png" alt="Project 1">
+            <h3>E-commerce Website</h3>
+            <p>Full-featured online store with cart functionality</p>
+            <a href="#" class="project-link">View Project</a>
+        </div>
+        <div class="project-card">
+            <img src="assets/images/project2.png" alt="Project 2">
+            <h3>Weather Dashboard</h3>
+            <p>Real-time weather application with API integration</p>
+            <a href="#" class="project-link">View Project</a>
+        </div>
+        <div class="project-card">
+            <img src="assets/images/project3.png" alt="Project 3">
+            <h3>Task Management App</h3>
+            <p>Productivity tool with drag-and-drop interface</p>
+            <a href="#" class="project-link">View Project</a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+    <h2>Get In Touch</h2>
+    <div class="contact-container">
+        <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> alex@example.com</p>
+            <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2023 Alex Morgan. All rights reserved.</p>
+</footer>
+</body>
+</html>
