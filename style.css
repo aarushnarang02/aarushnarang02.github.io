@@ -49,7 +49,7 @@ a {
 .section h2 {
     text-align: center;
     margin-bottom: 3rem;
-    color: var(--primary);
+    color: var(--light);
     position: relative;
 }
 
@@ -97,8 +97,8 @@ nav ul li a:hover {
 /* Hero Section */
 header {
     height: 100vh;
-    background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)),
-    url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3') center/cover;
+    background: linear-gradient(rgba(44, 62, 80, 0.5), rgba(44, 62, 80, 0.5)),
+    url('assets/images/nyc.png') center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,6 +139,7 @@ header {
     height: 300px;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center 25%;
     border: 5px solid var(--secondary);
     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
@@ -150,6 +151,7 @@ header {
 .about-text p {
     margin-bottom: 1.5rem;
     font-size: 1.1rem;
+    color: var(--light);
 }
 
 .skills {
@@ -252,12 +254,13 @@ header {
     justify-content: center;
     width: 50px;
     height: 50px;
-    background: var(--secondary);
-    color: white;
+    /*background: var(--light);*/
+    /*color: white;*/
     border-radius: 50%;
     font-size: 1.5rem;
     transition: all 0.3s;
 }
+
 
 .social-links a:hover {
     background: var(--primary);

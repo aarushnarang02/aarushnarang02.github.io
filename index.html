@@ -78,17 +78,18 @@
             <p><i class="fas fa-envelope"></i> aarushnarang02@gmail.com</p>
             <p><i class="fas fa-phone"></i> +91 97737 47312</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/aarushnarang/"><i class="fab fa-linkedin"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-        <form class="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" rows="5" required></textarea>
+        <form id="contact-form" class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
             <button type="submit" class="btn">Send Message</button>
         </form>
+        <div id="form-status"></div>
     </div>
 </section>
 
@@ -96,5 +97,36 @@
 <footer>
     <p>&copy; 2025 Aarush Narang. All rights reserved.</p>
 </footer>
+<script>
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("form-status");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const data = {
+            name: form.name.value,
+            email: form.email.value,
+            message: form.message.value
+        };
+
+        fetch("https://script.google.com/macros/s/AKfycbx57CHhzlxpOJKkAXRWXXNWcqafQLF9wHZ8INwZJ-960Ud9uXjHMykrjUPdcFppYk0j/exec", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(res => res.json())
+            .then(response => {
+                status.textContent = "Message sent successfully!";
+                form.reset();
+            })
+            .catch(error => {
+                status.textContent = "Something went wrong. Try again.";
+                console.error(error);
+            });
+    });
+</script>
 </body>
 </html>
