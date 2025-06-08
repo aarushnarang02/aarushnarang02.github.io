@@ -190,7 +190,6 @@ header {
     padding: 1rem;
 }
 
-
 /* Projects Section */
 .projects-grid {
     display: grid;
@@ -240,7 +239,7 @@ header {
 .contact-container {
     display: flex;
     gap: 3rem;
-    max-width: 800px;
+    max-width: 750px;
     margin: 0 auto;
     background: white;
     padding: 2rem;
@@ -253,15 +252,12 @@ header {
     height: 40px;
     width: 40px;
     margin-top: 1rem;
-
+    transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
-.contact-icon{
-    display: flex;
-    height: 40px;
-    width: 40px;
-    margin-top: 1rem;
-
+.contact-icons:hover {
+    transform: translateX(6px);
 }
 
 .contact-info {
@@ -309,7 +305,7 @@ header {
 }
 
 .contact-form {
-    flex: 1;
+    flex: 3;
     display: flex;
     flex-direction: column;
 }
