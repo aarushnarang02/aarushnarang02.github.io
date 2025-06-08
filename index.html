@@ -8,8 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+<!-- Hamburger Menu -->
+<div class="hamburger" id="hamburger">
+    <i class="fas fa-bars"></i>
+</div>
+
 <!-- Navigation -->
-<nav>
+<nav id="nav-menu">
     <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -21,7 +27,7 @@
 <!-- Hero Section -->
 <header id="home">
     <div class="hero-content">
-        <h1>Hi, I'm <span>Aarush Narang</span></h1>
+        <h1>Hi, I'm Aarush Narang</h1>
         <p>Generative AI Scientist</p>
         <a href="#projects" class="btn">View My Work</a>
     </div>
@@ -41,6 +47,23 @@
                 <span>React</span>
                 <span>Git</span>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section id="education" class="section">
+    <h2>Education</h2>
+    <div class="education-container">
+        <div class="education-item">
+            <h3>University of Arizona</h3>
+            <p><strong>MS in Data Science</strong> (Aug 2025 - May 2027)</p>
+            <p>Specialization in Artificial Intelligence and Machine Learning</p>
+        </div>
+        <div class="education-item">
+            <h3>Shiv Nadar University</h3>
+            <p><strong>B.Tech in Computer Science</strong> (Aug 2020 - May 2024)</p>
+            <p>Specialization in Data Science and Big Data Analytics</p>
         </div>
     </div>
 </section>
@@ -76,7 +99,6 @@
     <div class="contact-container">
         <div class="contact-info">
             <p><i class="fas fa-envelope"></i> aarushnarang02@gmail.com</p>
-            <p><i class="fas fa-phone"></i> +91 97737 47312</p>
             <div class="social-links">
                 <a href="#"><i class="fa-brands fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/aarushnarang/"><i class="fab fa-linkedin"></i></a>
@@ -125,6 +147,14 @@
                 status.textContent = "Something went wrong. Try again.";
                 console.error(error);
             });
+    });
+</script>
+<script>
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.querySelector("nav ul");
+
+    hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
     });
 </script>
 </body>

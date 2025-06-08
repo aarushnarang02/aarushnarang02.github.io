@@ -64,6 +64,19 @@ a {
     background: var(--secondary);
 }
 
+/* Default: hide hamburger, show nav */
+.hamburger {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 999;
+}
+
+
+
 /* Navigation */
 nav {
     background: white;
@@ -115,11 +128,6 @@ header {
     font-size: 3.5rem;
     margin-bottom: 1rem;
 }
-
-.hero-content h1 span {
-    color: var(--secondary);
-}
-
 .hero-content p {
     font-size: 1.5rem;
     margin-bottom: 2rem;
@@ -167,6 +175,21 @@ header {
     border-radius: 30px;
     font-size: 0.9rem;
 }
+
+/* Education Section */
+
+.education-item {
+    margin-bottom: 1.5rem;
+    color: var(--light);
+    padding: 1rem;
+}
+
+.education-item:hover {
+    background: var(--light);
+    color: var(--dark);
+    padding: 1rem;
+}
+
 
 /* Projects Section */
 .projects-grid {
@@ -305,11 +328,40 @@ footer {
         margin: 0 auto;
     }
 
-    nav ul {
-        flex-wrap: wrap;
-    }
+
 
     .hero-content h1 {
         font-size: 2.5rem;
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        top: 80px;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+        padding: 0.5rem;
+    }
+
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    nav {
+        position: relative;
+    }
+
+    nav ul li {
+        margin: 5px 0;
     }
 }
