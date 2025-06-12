@@ -338,6 +338,10 @@ footer {
         flex-direction: column;
     }
 
+    .contact-icons {
+        display: inline-block;
+    }
+
     .profile-img {
         margin: 0 auto;
     }
