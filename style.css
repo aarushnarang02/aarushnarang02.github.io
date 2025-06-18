@@ -343,6 +343,7 @@ footer {
 
     .hamburger {
         display: block;
+        color: var(--light);
     }
 
     nav {
