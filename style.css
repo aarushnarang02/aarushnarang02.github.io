@@ -18,6 +18,7 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #34495e;
+    user-select: none;
 }
 
 a {
@@ -43,7 +44,7 @@ a {
 }
 
 .section {
-    padding: 5rem 2rem;
+    padding: 9rem 2rem;
 }
 
 .section h2 {
@@ -341,9 +342,27 @@ footer {
 /* Responsive Design */
 @media (max-width: 768px) {
 
-    .hamburger {
+    .hamburger{
         display: block;
+        position: fixed;
         color: var(--light);
+    }
+
+    .hamburger .fa-times {
+        display: none;
+    }
+
+    /* When clicked: */
+    .hamburger.clicked .fa-bars {
+        display: none;
+    }
+
+    .hamburger.clicked .fa-times {
+        display: inline;
+    }
+
+    .hamburger.clicked i{
+        color: var(--dark);
     }
 
     nav {
@@ -353,9 +372,9 @@ footer {
     nav ul {
         display: none;
         flex-direction: column;
-        background-color: #fff;
-        position: absolute;
-        top: 80px;
+        background-color: rgba(255, 255, 255, 0.7);
+        position: fixed;
+        top: 0;
         width: 100%;
         box-shadow: 0 4px 8px rgba(0,0,0,0.6);
         padding: 0.5rem;
@@ -363,6 +382,7 @@ footer {
 
     nav ul.active {
         display: flex;
+
     }
 
     nav ul li {
