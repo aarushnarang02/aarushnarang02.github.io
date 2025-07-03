@@ -151,6 +151,7 @@ header {
     object-position: center 25%;
     border: 5px solid var(--secondary);
     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+
 }
 
 .about-text {
@@ -387,6 +388,10 @@ footer {
 
     nav ul li {
         margin: 5px 0;
+    }
+
+    .section {
+        padding: 5rem 2rem;
     }
 
     .about-container,

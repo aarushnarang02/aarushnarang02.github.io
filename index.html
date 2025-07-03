@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Open Graph -->
+    <meta property="og:image" content="https://aarush.work/icons/siteicon.png">
+    <meta property="og:url" content="https://aarush.work/">
+    <meta property="og:type" content="website">
+
     <title>Aarush Portfolio</title>
     <link rel="icon" type="image/png" href="icons/siteicon.png">
     <link rel="stylesheet" href="style.css">
@@ -20,8 +26,8 @@
 <nav id="nav-menu">
     <ul>
         <li><a href="#home">Home</a></li>
-        <li><a href="resume.html">Resume</a></li>
         <li><a href="#about">About</a></li>
+        <li><a href="resume.html">Resume</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
@@ -125,45 +131,6 @@
 <footer>
     <p>&copy; 2025 Aarush Narang. All rights reserved.</p>
 </footer>
-<script>
-    const form = document.getElementById("contact-form");
-    const status = document.getElementById("form-status");
-
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const formData = new URLSearchParams();
-        formData.append("name", form.name.value);
-        formData.append("email", form.email.value);
-        formData.append("message", form.message.value);
-
-        const scriptURL = "https://script.google.com/macros/s/AKfycbwnHDPAnXdZzsRxSKnhfTz3Aw3KVlV3EFYm5AmKEmYUYifft_qYz-2AtRIgLX2egz8B/exec";
-
-        fetch(scriptURL, {
-            method: "POST",
-            body: formData
-        })
-            .then(res => res.text())
-            .then(response => {
-                status.textContent = "✅ Message sent successfully!";
-                status.style.color = "green";
-                form.reset();
-            })
-            .catch(error => {
-                status.textContent = "❌ Failed to send. Try again.";
-                status.style.color = "red";
-                console.error("Error:", error);
-            });
-    });
-</script>
-<script>
-    const hamburger = document.getElementById("hamburger");
-    const navMenu = document.querySelector("nav ul");
-
-    hamburger.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-        hamburger.classList.toggle("clicked");
-    });
-</script>
+<script src="index.js"></script>
 </body>
 </html>
