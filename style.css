@@ -112,7 +112,7 @@ nav ul li a:hover {
 header {
     height: 100vh;
     background: linear-gradient(rgba(44, 62, 80, 0.5), rgba(44, 62, 80, 0.5)),
-    url('assets/images/nyc.png') center/cover;
+    url('assets/images/NYC_GIF.gif') center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
