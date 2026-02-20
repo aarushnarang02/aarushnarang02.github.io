@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .catch(error => {
                     status.textContent = "❌ Failed to send. Try again.";
                     status.style.color = "red";
+
                     console.error("Error:", error);
                 });
         });
