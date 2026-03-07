@@ -431,20 +431,20 @@ header {
 .project-card.animate-on-scroll.stagger-2.visible { animation-delay: 0.28s; }
 .project-card.animate-on-scroll.stagger-3.visible { animation-delay: 0.46s; }
 
-/* Subtle hover only – main animation is scroll-triggered bounce above */
 .project-card:hover {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
 .project-card img {
     width: 100%;
     height: 250px;
     object-fit: cover;
-    transition: transform 0.4s var(--anim-ease);
+    transition: transform 0.5s var(--anim-ease);
 }
 
 .project-card:hover img {
-    transform: scale(1.03);
+    transform: scale(1.05);
 }
 
 .project-card h3 {

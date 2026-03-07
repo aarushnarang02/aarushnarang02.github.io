@@ -70,25 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }, observerOptions);
 
-    // Project cards: trigger bounce as you scroll down into the section (slightly earlier)
-    const projectCardOptions = {
-        root: null,
-        rootMargin: "0px 0px -100px 0px",
-        threshold: 0.08
-    };
-    const projectCardObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-            }
-        });
-    }, projectCardOptions);
-
-    // Observe section headings, about container, contact container, footer
+    // Observe section headings, about container, project cards, contact container, footer
     document.querySelectorAll(".section h2").forEach((el) => observer.observe(el));
     const aboutContainer = document.querySelector(".about-container");
     if (aboutContainer) observer.observe(aboutContainer);
-    document.querySelectorAll(".project-card").forEach((el) => projectCardObserver.observe(el));
+    document.querySelectorAll(".project-card").forEach((el) => observer.observe(el));
     const contactContainer = document.querySelector(".contact-container");
     if (contactContainer) observer.observe(contactContainer);
     const footer = document.querySelector("footer");
