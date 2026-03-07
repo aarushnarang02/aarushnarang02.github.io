@@ -51,4 +51,35 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+    // Scroll-triggered animations (Anima-style)
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const observerOptions = {
+        root: null,
+        rootMargin: "0px 0px -80px 0px",
+        threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, observerOptions);
+
+    // Observe section headings, about container, project cards, contact container, footer
+    document.querySelectorAll(".section h2").forEach((el) => observer.observe(el));
+    const aboutContainer = document.querySelector(".about-container");
+    if (aboutContainer) observer.observe(aboutContainer);
+    document.querySelectorAll(".project-card").forEach((el) => observer.observe(el));
+    const contactContainer = document.querySelector(".contact-container");
+    if (contactContainer) observer.observe(contactContainer);
+    const footer = document.querySelector("footer");
+    if (footer) observer.observe(footer);
+
+    // Elements with animate-on-scroll class (used in HTML)
+    document.querySelectorAll(".animate-on-scroll, .animate-on-scroll-left, .animate-on-scroll-right").forEach((el) => observer.observe(el));
 });
