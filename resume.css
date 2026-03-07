@@ -30,7 +30,7 @@
 
 .animate-on-scroll {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(32px);
     transition: opacity var(--anim-duration) var(--anim-ease),
                 transform var(--anim-duration) var(--anim-ease);
 }
@@ -40,11 +40,11 @@
     transform: translateY(0);
 }
 
-.stagger-1 { transition-delay: 0.05s; }
-.stagger-2 { transition-delay: 0.1s; }
-.stagger-3 { transition-delay: 0.15s; }
-.stagger-4 { transition-delay: 0.2s; }
-.stagger-5 { transition-delay: 0.25s; }
+.stagger-1 { transition-delay: 0.06s; }
+.stagger-2 { transition-delay: 0.12s; }
+.stagger-3 { transition-delay: 0.18s; }
+.stagger-4 { transition-delay: 0.24s; }
+.stagger-5 { transition-delay: 0.3s; }
 
 @media (prefers-reduced-motion: reduce) {
     :root { --anim-duration: 0.01s; }
