@@ -7,6 +7,51 @@
     --dark: #34495e;
     --sidebar-bg: #1e2a38;
     --sidebar-text: #ecf0f1;
+    --anim-duration: 0.5s;
+    --anim-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ========== Resume page animations ========== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--anim-duration) var(--anim-ease),
+                transform var(--anim-duration) var(--anim-ease);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.1s; }
+.stagger-3 { transition-delay: 0.15s; }
+.stagger-4 { transition-delay: 0.2s; }
+.stagger-5 { transition-delay: 0.25s; }
+
+@media (prefers-reduced-motion: reduce) {
+    :root { --anim-duration: 0.01s; }
+    .animate-on-scroll {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 * {
@@ -50,6 +95,12 @@ body {
     border: 1px solid var(--tertiary);
     margin: 100px auto 20px;
     display: block;
+    transition: transform 0.4s var(--anim-ease), box-shadow 0.4s;
+}
+
+.avatar-box img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(255, 193, 0, 0.2);
 }
 
 .name {
@@ -105,6 +156,14 @@ body {
     margin-top: 3px;
 }
 
+a.contact-link {
+    transition: color 0.25s;
+}
+
+a.contact-link:hover {
+    color: var(--secondary);
+}
+
 .social-list {
     display: flex;
     justify-content: center;
@@ -119,11 +178,12 @@ body {
 .social-link {
     color: var(--tertiary);
     font-size: 1.5rem;
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.3s var(--anim-ease);
 }
 
 .social-link:hover {
     color: var(--secondary);
+    transform: translateY(-3px) scale(1.1);
 }
 
 /* Main Content Container */
@@ -157,9 +217,15 @@ body {
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
+.back-button {
+    transition: background-color 0.3s, transform 0.3s var(--anim-ease), box-shadow 0.3s;
+}
+
 .back-button:hover {
     background-color: var(--tertiary);
-    transform: translateY(-1px);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
 }
 
 .back-button ion-icon {
@@ -184,10 +250,15 @@ body {
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
+.download-button {
+    transition: background-color 0.3s, color 0.3s, transform 0.3s var(--anim-ease), box-shadow 0.3s;
+}
+
 .download-button:hover {
     background-color: var(--secondary);
     color: var(--light);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
 }
 
 .download-button ion-icon {
@@ -245,6 +316,11 @@ body {
     margin-bottom: 35px;
     position: relative;
     padding-left: 10px;
+    transition: transform 0.25s var(--anim-ease);
+}
+
+.timeline-item:hover {
+    transform: translateX(6px);
 }
 
 .timeline-item:before {
