@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta name="description" content="Aarush Narang — Data scientist and ML engineer. MS in Data Science at the University of Arizona. I build production AI systems and Gen AI copilots.">
+
     <!-- Open Graph meta tags to control link preview on social platforms -->
+    <meta property="og:title" content="Aarush Narang | Data Scientist & ML Engineer">
     <meta property="og:image" content="https://aarush.work/assets/images/preview_img.png">
     <meta property="og:url" content="https://aarush.work/">
     <meta property="og:type" content="website">
-    <meta property="og:description" content="View my portfolio">
+    <meta property="og:description" content="Data scientist and ML engineer building production AI systems. MS in Data Science at the University of Arizona.">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <title>Aarush Narang | Portfolio</title>
+    <title>Aarush Narang | Data Scientist & ML Engineer</title>
     <link rel="icon" type="image/png" href="icons/siteicon.png">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
@@ -28,9 +32,10 @@
     <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="resume.html">Resume</a></li>
+        <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="resume.html">Resume</a></li>
     </ul>
 </nav>
 
@@ -39,71 +44,209 @@
 <!-- Hero Section -->
 <header id="home">
     <div class="hero-content">
-        <h1 class="hero-anim">Hi, I'm Aarush Narang</h1>
-        <p class="hero-anim">Master's student in Data Science</p>
-        <a href="#projects" class="btn hero-anim">View My Work</a>
+        <p class="hero-eyebrow hero-anim">Hi, my name is</p>
+        <h1 class="hero-anim">Aarush Narang</h1>
+        <p class="hero-roles hero-anim">
+            I build <span class="typed" id="typed-roles"></span><span class="cursor" id="type-cursor">&nbsp;</span>
+        </p>
+        <p class="hero-bio hero-anim">
+            Data scientist and ML engineer. At HCLTech I shipped a Gen AI copilot that
+            <strong>cut mean resolution time 76%</strong> (105&rarr;25 min) and improved backend
+            throughput 26% across 4,000+ knowledge docs. Currently pursuing an
+            <strong>MS in Data Science</strong> at the University of Arizona.
+        </p>
+        <div class="hero-cta hero-anim">
+            <a href="#projects" class="btn">View My Work</a>
+            <a href="resume.html" class="btn-outline">View Resume</a>
+        </div>
+        <div class="hero-socials hero-anim">
+            <a href="https://github.com/aarushnarang02" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/aarushnarang/" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/aarushhnarang" aria-label="X" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+            <a href="mailto:aarushnarang@arizona.edu" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
     </div>
+    <a href="#about" class="scroll-cue" aria-label="Scroll down"><i class="fas fa-chevron-down"></i></a>
 </header>
 
 <!-- About Section -->
 <section id="about" class="section">
     <h2 class="animate-on-scroll">About Me</h2>
     <div class="about-container animate-on-scroll">
-        <img src="assets/images/profile.png" alt="Profile Picture" class="profile-img">
+        <img src="assets/images/profile.png" alt="Aarush Narang" class="profile-img" loading="lazy">
         <div class="about-text animate-on-scroll-right stagger-1">
-            <p style="text-align: justify;">
-                Master’s in Data Science student at University of Arizona with two years of industrial 
-                and professional experience in delivering end-to-end enterprise applications, deploying 
-                Gen AI solutions, and developing automated employee/resource cost models, deploying them 
-                on cloud platforms. I aim to engineer scalable automated solutions, impacting decision 
-                making and solving complex problems across industries. 
+            <p>
+                I'm a data scientist and ML engineer with two years of industry experience shipping
+                production AI systems. At <strong>HCLTech</strong> I built Gen AI copilots and Python/C++/TypeScript
+                validation pipelines across 4,000+ enterprise knowledge documents; earlier at
+                <strong>Carrier</strong> and <strong>PwC</strong> I shipped ML-driven tooling and graph data pipelines
+                that measurably cut cost and turnaround.
             </p>
+            <p>
+                I'm now pursuing an <strong>MS in Data Science</strong> at the University of Arizona
+                (2025&ndash;2027), after a B.Tech in Computer Science from
+                <strong>Shiv Nadar University</strong>. I care about turning messy data into scalable,
+                measurable decision-making systems.
+            </p>
+            <div class="skills-groups">
+                <div class="skill-group">
+                    <span class="skill-label">Core</span>
+                    <div class="skill-pills">
+                        <span>Python</span><span>PyTorch</span><span>SQL</span><span>C++</span><span>React</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <span class="skill-label">Proficient</span>
+                    <div class="skill-pills">
+                        <span>TensorFlow</span><span>OpenCV</span><span>TypeScript</span><span>Node.js</span><span>PostgreSQL</span><span>Power BI</span><span>Tableau</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <span class="skill-label">Familiar</span>
+                    <div class="skill-pills">
+                        <span>Go</span><span>Java</span><span>R</span><span>Neo4j</span><span>MongoDB</span><span>Azure AI</span><span>Snowflake</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Education Section -->
-<!--<section id="education" class="section">-->
-<!--    <h2>Education</h2>-->
-<!--    <div class="education-container">-->
-<!--        <div class="education-item">-->
-<!--            <h3>University of Arizona</h3>-->
-<!--            <p><strong>MS in Data Science</strong> (Aug 2025 - May 2027)</p>-->
-<!--            <p>Specialization in Artificial Intelligence and Machine Learning</p>-->
-<!--        </div>-->
-<!--        <div class="education-item">-->
-<!--            <h3>Shiv Nadar University</h3>-->
-<!--            <p><strong>B.Tech in Computer Science</strong> (Aug 2020 - May 2024)</p>-->
-<!--            <p>Specialization in Data Science and Big Data Analytics</p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
+<!-- Experience Section -->
+<section id="experience" class="section">
+    <h2 class="animate-on-scroll">Experience</h2>
+    <div class="timeline">
+        <div class="timeline-item animate-on-scroll-right stagger-1">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <div class="timeline-head">
+                    <h3>Software Engineer <span class="timeline-co">· HCLTech</span></h3>
+                    <span class="timeline-date">Jul 2024 – Jul 2025</span>
+                </div>
+                <p class="timeline-role">Generative AI Development Team</p>
+                <ul>
+                    <li><strong>26% backend throughput gain</strong> and a <strong>76% cut in mean resolution time</strong> (105→25 min) by running scenario-based testing on ticket/content-quality time series and shipping Python, C++ &amp; TypeScript validation pipelines for 4,000+ knowledge-base documents.</li>
+                    <li><strong>35% fewer document-quality escalations</strong> via what-if analysis on freshness, schema drift, and missing-field scenarios, extending automated validation with anomaly detection.</li>
+                    <li>Delivered 100% on-time quarterly safety audits through ServiceNow integrations and reproducible QA exports.</li>
+                </ul>
+                <div class="timeline-tags"><span>Gen AI</span><span>Python</span><span>C++</span><span>TypeScript</span><span>ServiceNow</span></div>
+            </div>
+        </div>
+        <div class="timeline-item animate-on-scroll-right stagger-2">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <div class="timeline-head">
+                    <h3>Software Engineer Intern <span class="timeline-co">· HCLTech</span></h3>
+                    <span class="timeline-date">Jan 2024 – Jul 2024</span>
+                </div>
+                <p class="timeline-role">Sales Performance Tooling</p>
+                <ul>
+                    <li>Drove adoption across HR, PMO, and L2 leadership by shipping a <strong>React, TypeScript &amp; MS SQL Server</strong> application with leadership-ready views.</li>
+                    <li><strong>50% reduction in manual executive reporting effort</strong> by engineering reusable SQL features and delivering Power BI &amp; Tableau dashboards.</li>
+                </ul>
+                <div class="timeline-tags"><span>React</span><span>TypeScript</span><span>MS SQL</span><span>Power BI</span><span>Tableau</span></div>
+            </div>
+        </div>
+        <div class="timeline-item animate-on-scroll-right stagger-3">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <div class="timeline-head">
+                    <h3>Web Developer Intern <span class="timeline-co">· Carrier</span></h3>
+                    <span class="timeline-date">May 2023 – Jul 2023</span>
+                </div>
+                <ul>
+                    <li><strong>38% reduction in accounts-payable helpdesk volume</strong> (450→280 tickets/week) by integrating an ML-driven FAQ chatbot with validation hooks.</li>
+                    <li><strong>35% increase in in-app engagement</strong> by designing React, JavaScript &amp; jQuery workflows with Excel-backed operational reporting.</li>
+                </ul>
+                <div class="timeline-tags"><span>ML Chatbot</span><span>React</span><span>JavaScript</span><span>jQuery</span></div>
+            </div>
+        </div>
+        <div class="timeline-item animate-on-scroll-right stagger-4">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+                <div class="timeline-head">
+                    <h3>Technical Intern <span class="timeline-co">· PwC</span></h3>
+                    <span class="timeline-date">May 2022 – Sep 2022</span>
+                </div>
+                <ul>
+                    <li><strong>Sub-second retrieval for 1,000+ employee records</strong> by engineering graph features in Python and validating model assumptions on Neo4j.</li>
+                    <li><strong>40% faster month-end reporting</strong> by building Python &amp; REST data pipelines with automated validation.</li>
+                </ul>
+                <div class="timeline-tags"><span>Python</span><span>Neo4j</span><span>REST</span><span>Graph DB</span></div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Projects Section -->
 <section id="projects" class="section">
-    <h2 class="animate-on-scroll">My Projects</h2>
+    <h2 class="animate-on-scroll">Featured Projects</h2>
     <div class="projects-grid">
         <div class="project-card animate-on-scroll stagger-1">
-            <img src="assets/images/Project1.jpg" style="" alt="Project 1">
-            <h3>Face Recognition-Based Attendance System</h3>
-            <p>Facial recognition-based biometric attendance system for
-                educational and corporate settings</p><br><br>
-            <a href="https://github.com/aarushnarang02?tab=repositories" class="project-link">View Project</a>
+            <div class="project-img-wrap">
+                <img src="assets/images/Project1.jpg" alt="Computer vision attendance system" loading="lazy">
+            </div>
+            <div class="project-body">
+                <h3>Computer Vision Attendance System</h3>
+                <p class="project-metric">Stable camera-to-database latency in pilot runs</p>
+                <p>Biometric attendance and site-monitoring system: processes field imagery with
+                    OpenCV for layout-aware recognition and persists results in PostgreSQL for
+                    repeatable comparison testing.</p>
+            </div>
+            <div class="project-foot">
+                <div class="project-tags"><span>Python</span><span>C++</span><span>OpenCV</span><span>React</span><span>PostgreSQL</span></div>
+                <div class="project-links">
+                    <a href="https://github.com/aarushnarang02?tab=repositories" target="_blank" rel="noopener" aria-label="Code"><i class="fab fa-github"></i> Code</a>
+                </div>
+            </div>
         </div>
         <div class="project-card animate-on-scroll stagger-2">
-            <img src="assets/images/Project2.png" alt="Project 2">
-            <h3>ChatGPT Plagiarism Detector</h3>
-            <p>Detection plagiarism tool to identify rephrasing using QuillBOT, leveraging
-                ChatGPT API and paraphrasing API to detect paraphrased text</p>
-            <a href="https://github.com/aarushnarang02?tab=repositories" class="project-link">View Project</a>
+            <div class="project-img-wrap">
+                <img src="assets/images/Project3.png" alt="Human parsing model output" loading="lazy">
+            </div>
+            <div class="project-body">
+                <h3>Self-Correction for Human Parsing</h3>
+                <p class="project-metric">84.7% mIoU on LIP — 2.3% above the published SCHP baseline</p>
+                <p>Trained and evaluated a PyTorch human-parsing model, engineering input/label
+                    pipelines and running what-if scenarios under label noise across specialized
+                    evaluation tasks.</p>
+            </div>
+            <div class="project-foot">
+                <div class="project-tags"><span>Python</span><span>PyTorch</span><span>Computer Vision</span></div>
+                <div class="project-links">
+                    <a href="https://github.com/aarushnarang02?tab=repositories" target="_blank" rel="noopener" aria-label="Code"><i class="fab fa-github"></i> Code</a>
+                </div>
+            </div>
         </div>
         <div class="project-card animate-on-scroll stagger-3">
-            <img src="assets/images/Project3.png" alt="Project 3">
-            <h3>Self-Correction for Human Parsing (SCHP) Model</h3>
-            <p>Compared SCHP with leading single-person human parsing methods across key benchmarks,
-                showcasing its effectiveness and robustness to label noise.</p>
-            <a href="https://github.com/aarushnarang02?tab=repositories" class="project-link">View Project</a>
+            <div class="project-img-wrap">
+                <img src="assets/images/Project2.png" alt="Plagiarism detection tool" loading="lazy">
+            </div>
+            <div class="project-body">
+                <h3>AI Paraphrase &amp; Plagiarism Detector</h3>
+                <p class="project-metric">Detects machine-paraphrased text from rephrasing tools</p>
+                <p>Plagiarism tool that flags AI-rephrased passages by combining OCR extraction with
+                    the ChatGPT API and a paraphrase-detection pipeline.</p>
+            </div>
+            <div class="project-foot">
+                <div class="project-tags"><span>Python</span><span>ChatGPT API</span><span>EasyOCR</span><span>NLP</span></div>
+                <div class="project-links">
+                    <a href="https://github.com/aarushnarang02?tab=repositories" target="_blank" rel="noopener" aria-label="Code"><i class="fab fa-github"></i> Code</a>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <!-- Publication highlight -->
+    <div class="publication animate-on-scroll">
+        <div class="publication-icon"><i class="fas fa-file-lines"></i></div>
+        <div class="publication-body">
+            <span class="publication-tag">Publication · DEXA 2024 · Naples, Italy</span>
+            <h3>Analyzing the Efficacy of Large Language Models: A Comparative Study</h3>
+            <p>Peer-reviewed paper (co-authored) presented at the 35th International Conference on
+                Database and Expert Systems Applications, published in the Springer LNCS series.</p>
+        </div>
+        <a href="https://link.springer.com/chapter/10.1007/978-3-031-68309-1_18" target="_blank" rel="noopener" class="btn-outline publication-link">Read Paper <i class="fas fa-arrow-up-right-from-square"></i></a>
     </div>
 </section>
 
@@ -112,10 +255,10 @@
     <h2 class="animate-on-scroll">Let's Connect!</h2>
     <div class="contact-container animate-on-scroll">
         <div class="contact-info">
-            <a href="mailto:aarushnarang02@gmail.com"><img src="icons/gmail.png" class="contact-icons" alt="Email"></a>
-            <a href="https://github.com/aarushnarang02"><img src="icons/github.png" class="contact-icons"></a>
-            <a href="https://www.linkedin.com/in/aarushnarang/"><img src="icons/linkedin.png" class="contact-icons"></a>
-            <a href="https://x.com/aarushhnarang"><img src="icons/twitter.png" class="contact-icons"></a>
+            <a href="mailto:aarushnarang@arizona.edu" aria-label="Email"><img src="icons/gmail.png" class="contact-icons" alt="Email" loading="lazy"></a>
+            <a href="https://github.com/aarushnarang02" target="_blank" rel="noopener" aria-label="GitHub"><img src="icons/github.png" class="contact-icons" alt="GitHub" loading="lazy"></a>
+            <a href="https://www.linkedin.com/in/aarushnarang/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="icons/linkedin.png" class="contact-icons" alt="LinkedIn" loading="lazy"></a>
+            <a href="https://x.com/aarushhnarang" target="_blank" rel="noopener" aria-label="X"><img src="icons/twitter.png" class="contact-icons" alt="X" loading="lazy"></a>
         </div>
         <form id="contact-form" class="contact-form">
             <input type="text" name="name" placeholder="Your Name" required>
@@ -129,7 +272,7 @@
 
 <!-- Footer -->
 <footer class="animate-on-scroll">
-    <p>&copy; 2025 Aarush Narang. All rights reserved.</p>
+    <p>&copy; 2026 Aarush Narang · Built &amp; designed by me · <a href="https://github.com/aarushnarang02" target="_blank" rel="noopener">GitHub</a></p>
 </footer>
 <script src="index.js"></script>
 </body>

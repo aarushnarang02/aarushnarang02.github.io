@@ -1,12 +1,19 @@
 :root {
-    --primary: #2c3e50;
-    --secondary: #3498db;
-    --tertiary: #ffbf00;
-    --accent: #e74c3c;
-    --light: #ecf0f1;
-    --dark: #34495e;
-    --sidebar-bg: #1e2a38;
-    --sidebar-text: #ecf0f1;
+    /* Slate dark palette (matches portfolio) */
+    --bg: #0f172a;
+    --bg-alt: #1e293b;
+    --border: #2d3b52;
+    --heading: #e2e8f0;
+    --muted: #94a3b8;
+
+    --primary: #0f172a;     /* container bg */
+    --secondary: #38bdf8;   /* links / titles */
+    --tertiary: #38bdf8;    /* accents, dots, lines */
+    --accent: #38bdf8;
+    --light: #cbd5e1;       /* body text */
+    --dark: #0f172a;        /* page bg */
+    --sidebar-bg: #1e293b;
+    --sidebar-text: #cbd5e1;
     --anim-duration: 0.5s;
     --anim-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -63,7 +70,7 @@
 
 body {
     background-color: var(--dark);
-    color: var(--tertiary);
+    color: var(--light);
     line-height: 1.6;
     display: flex;
     min-height: 100vh;
@@ -105,7 +112,7 @@ body {
 
 .name {
     font-size: 1.8rem;
-    color: var(--tertiary);
+    color: var(--heading);
     margin-bottom: 5px;
 }
 
@@ -191,6 +198,7 @@ a.contact-link:hover {
     flex: 1;
     max-width: calc(100% - 300px);
     background: var(--primary);
+    border-left: 1px solid var(--border);
     padding: 40px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     overflow-y: auto;
@@ -238,8 +246,9 @@ a.contact-link:hover {
     top: 20px;
     left: 220px;
     padding: 15px 15px;
-    background-color: var(--light);
+    background-color: var(--bg-alt);
     color: var(--secondary);
+    border: 1px solid var(--secondary);
     text-decoration: none;
     border-radius: 5px;
     font-weight: 500;
@@ -256,9 +265,9 @@ a.contact-link:hover {
 
 .download-button:hover {
     background-color: var(--secondary);
-    color: var(--light);
+    color: var(--bg);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
+    box-shadow: 0 6px 16px rgba(56, 189, 248, 0.4);
 }
 
 .download-button ion-icon {
@@ -282,7 +291,7 @@ a.contact-link:hover {
 
 .h1{
     font-size: 2rem;
-    color: var(--tertiary);
+    color: var(--heading);
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 40px;
@@ -295,7 +304,7 @@ a.contact-link:hover {
 
 .h2 {
     font-size: 1.8rem;
-    color: var(--tertiary);
+    color: var(--heading);
     text-transform: uppercase;
     letter-spacing: 1px;
 

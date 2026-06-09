@@ -52,8 +52,67 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Scroll-triggered animations (Anima-style)
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Hero typing effect (rotates through roles)
+    const typedEl = document.getElementById("typed-roles");
+    if (typedEl) {
+        const roles = [
+            "production AI systems.",
+            "Gen AI copilots.",
+            "ML pipelines.",
+            "data-driven solutions."
+        ];
+        if (prefersReducedMotion) {
+            typedEl.textContent = roles[0];
+            const cursor = document.getElementById("type-cursor");
+            if (cursor) cursor.style.display = "none";
+        } else {
+            let roleIndex = 0, charIndex = 0, deleting = false;
+            const type = () => {
+                const current = roles[roleIndex];
+                typedEl.textContent = current.slice(0, charIndex);
+                if (!deleting && charIndex < current.length) {
+                    charIndex++;
+                    setTimeout(type, 70);
+                } else if (!deleting && charIndex === current.length) {
+                    deleting = true;
+                    setTimeout(type, 1800);
+                } else if (deleting && charIndex > 0) {
+                    charIndex--;
+                    setTimeout(type, 35);
+                } else {
+                    deleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                    setTimeout(type, 350);
+                }
+            };
+            type();
+        }
+    }
+
+    // Active nav link highlighting on scroll
+    const sectionIds = ["home", "about", "experience", "projects", "contact"];
+    const navAnchors = {};
+    document.querySelectorAll('nav ul li a').forEach(a => {
+        const href = a.getAttribute("href");
+        if (href && href.startsWith("#")) navAnchors[href.slice(1)] = a;
+    });
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                Object.values(navAnchors).forEach(a => a.classList.remove("active"));
+                const active = navAnchors[entry.target.id];
+                if (active) active.classList.add("active");
+            }
+        });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+    sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) sectionObserver.observe(el);
+    });
+
+    // Scroll-triggered animations (Anima-style)
     if (prefersReducedMotion) return;
 
     const observerOptions = {
