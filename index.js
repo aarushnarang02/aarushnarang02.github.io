@@ -112,16 +112,23 @@ document.addEventListener("DOMContentLoaded", () => {
         if (el) sectionObserver.observe(el);
     });
 
-    // Hero: cursor spotlight + particle network
+    // Hero: deep-space starfield (twinkle + parallax + shooting stars + planet)
     const header = document.getElementById("home");
     const canvas = document.getElementById("hero-canvas");
     if (header && canvas && !prefersReducedMotion) {
         const ctx = canvas.getContext("2d");
-        let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-        let particles = [];
-        const mouse = { x: -9999, y: -9999 };
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        let w = 0, h = 0, stars = [], shooters = [], planet = null;
+        // parallax target + smoothed value
+        const par = { tx: 0, ty: 0, x: 0, y: 0 };
 
-        const resize = () => {
+        const STAR_TINTS = [
+            "255, 255, 255",   // white
+            "203, 225, 255",   // cool blue-white
+            "255, 236, 209"    // warm
+        ];
+
+        const build = () => {
             w = header.clientWidth;
             h = header.clientHeight;
             canvas.width = w * dpr;
@@ -129,71 +136,140 @@ document.addEventListener("DOMContentLoaded", () => {
             canvas.style.width = w + "px";
             canvas.style.height = h + "px";
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            const count = Math.min(90, Math.floor((w * h) / 16000));
-            particles = Array.from({ length: count }, () => ({
-                x: Math.random() * w,
-                y: Math.random() * h,
-                vx: (Math.random() - 0.5) * 0.35,
-                vy: (Math.random() - 0.5) * 0.35
-            }));
-        };
-        resize();
-        window.addEventListener("resize", resize);
 
-        // Spotlight follows cursor via CSS vars
+            const count = Math.min(260, Math.floor((w * h) / 5200));
+            stars = Array.from({ length: count }, () => {
+                const depth = Math.random();           // 0 far .. 1 near
+                return {
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    r: 0.4 + depth * 1.6,
+                    depth,
+                    tint: STAR_TINTS[(Math.random() * STAR_TINTS.length) | 0],
+                    baseA: 0.35 + Math.random() * 0.5,
+                    twAmp: 0.25 + Math.random() * 0.5,
+                    twSpd: 0.6 + Math.random() * 1.8,
+                    phase: Math.random() * Math.PI * 2
+                };
+            });
+
+            // distant planet in upper-right
+            const pr = Math.max(50, Math.min(w, h) * 0.13);
+            planet = { x: w * 0.82, y: h * 0.26, r: pr };
+        };
+        build();
+        window.addEventListener("resize", build);
+
         header.addEventListener("pointermove", (e) => {
             const r = header.getBoundingClientRect();
-            const px = e.clientX - r.left, py = e.clientY - r.top;
-            mouse.x = px; mouse.y = py;
-            header.style.setProperty("--mx", px + "px");
-            header.style.setProperty("--my", py + "px");
+            par.tx = (e.clientX - r.left) / w - 0.5;
+            par.ty = (e.clientY - r.top) / h - 0.5;
         });
-        header.addEventListener("pointerleave", () => {
-            mouse.x = -9999; mouse.y = -9999;
-        });
+        header.addEventListener("pointerleave", () => { par.tx = 0; par.ty = 0; });
 
-        const LINK_DIST = 130, MOUSE_DIST = 170;
-        const draw = () => {
+        const spawnShooter = () => {
+            const edge = Math.random();
+            const startX = edge * w * 0.8;
+            const startY = Math.random() * h * 0.4;
+            const ang = (Math.PI / 4) + (Math.random() - 0.5) * 0.5; // down-right
+            const speed = 9 + Math.random() * 6;
+            shooters.push({
+                x: startX, y: startY,
+                vx: Math.cos(ang) * speed,
+                vy: Math.sin(ang) * speed,
+                len: 90 + Math.random() * 80,
+                life: 0, maxLife: 60 + Math.random() * 30
+            });
+        };
+        let nextShooter = 1200 + Math.random() * 2500;
+
+        const drawPlanet = () => {
+            const { x, y, r } = planet;
+            // soft outer glow
+            const glow = ctx.createRadialGradient(x, y, r * 0.6, x, y, r * 2.1);
+            glow.addColorStop(0, "rgba(56, 189, 248, 0.10)");
+            glow.addColorStop(1, "rgba(56, 189, 248, 0)");
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(x, y, r * 2.1, 0, Math.PI * 2);
+            ctx.fill();
+            // body with terminator shading (lit from upper-left)
+            const body = ctx.createRadialGradient(x - r * 0.4, y - r * 0.4, r * 0.1, x, y, r);
+            body.addColorStop(0, "rgba(70, 90, 120, 0.55)");
+            body.addColorStop(0.55, "rgba(38, 52, 78, 0.5)");
+            body.addColorStop(1, "rgba(14, 20, 36, 0.55)");
+            ctx.fillStyle = body;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fill();
+            // thin rim light
+            ctx.strokeStyle = "rgba(125, 211, 252, 0.25)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(x, y, r, -Math.PI * 0.85, -Math.PI * 0.15);
+            ctx.stroke();
+        };
+
+        let t = 0, last = performance.now();
+        const draw = (now) => {
+            const dt = Math.min(50, now - last); last = now;
+            t += dt / 1000;
+
+            // smooth parallax
+            par.x += (par.tx - par.x) * 0.05;
+            par.y += (par.ty - par.y) * 0.05;
+
             ctx.clearRect(0, 0, w, h);
-            for (let i = 0; i < particles.length; i++) {
-                const p = particles[i];
-                p.x += p.vx; p.y += p.vy;
-                if (p.x < 0 || p.x > w) p.vx *= -1;
-                if (p.y < 0 || p.y > h) p.vy *= -1;
 
-                // links between particles
-                for (let j = i + 1; j < particles.length; j++) {
-                    const q = particles[j];
-                    const dx = p.x - q.x, dy = p.y - q.y;
-                    const d = Math.hypot(dx, dy);
-                    if (d < LINK_DIST) {
-                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.12 * (1 - d / LINK_DIST)})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(q.x, q.y);
-                        ctx.stroke();
-                    }
-                }
+            drawPlanet();
 
-                // link to cursor
-                const mdx = p.x - mouse.x, mdy = p.y - mouse.y;
-                const md = Math.hypot(mdx, mdy);
-                if (md < MOUSE_DIST) {
-                    ctx.strokeStyle = `rgba(56, 189, 248, ${0.4 * (1 - md / MOUSE_DIST)})`;
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(mouse.x, mouse.y);
-                    ctx.stroke();
-                }
-
-                // dot
-                ctx.fillStyle = "rgba(148, 163, 184, 0.55)";
+            // stars
+            for (const s of stars) {
+                const ox = par.x * s.depth * 30;
+                const oy = par.y * s.depth * 30;
+                const a = Math.max(0, Math.min(1,
+                    s.baseA + Math.sin(t * s.twSpd + s.phase) * s.twAmp));
+                ctx.fillStyle = `rgba(${s.tint}, ${a})`;
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+                ctx.arc(s.x + ox, s.y + oy, s.r, 0, Math.PI * 2);
+                ctx.fill();
+                // glint on the brightest near stars
+                if (s.depth > 0.85 && a > 0.7) {
+                    ctx.fillStyle = `rgba(${s.tint}, ${(a - 0.7) * 0.5})`;
+                    ctx.fillRect(s.x + ox - s.r * 3, s.y + oy - 0.4, s.r * 6, 0.8);
+                    ctx.fillRect(s.x + ox - 0.4, s.y + oy - s.r * 3, 0.8, s.r * 6);
+                }
+            }
+
+            // shooting stars
+            nextShooter -= dt;
+            if (nextShooter <= 0) { spawnShooter(); nextShooter = 2500 + Math.random() * 4000; }
+            for (let i = shooters.length - 1; i >= 0; i--) {
+                const sh = shooters[i];
+                sh.x += sh.vx; sh.y += sh.vy; sh.life++;
+                const k = 1 - sh.life / sh.maxLife;
+                if (sh.life >= sh.maxLife || sh.x > w + 100 || sh.y > h + 100) {
+                    shooters.splice(i, 1); continue;
+                }
+                const tailX = sh.x - sh.vx / Math.hypot(sh.vx, sh.vy) * sh.len;
+                const tailY = sh.y - sh.vy / Math.hypot(sh.vx, sh.vy) * sh.len;
+                const grad = ctx.createLinearGradient(sh.x, sh.y, tailX, tailY);
+                grad.addColorStop(0, `rgba(255, 255, 255, ${0.9 * k})`);
+                grad.addColorStop(0.3, `rgba(125, 211, 252, ${0.5 * k})`);
+                grad.addColorStop(1, "rgba(125, 211, 252, 0)");
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(sh.x, sh.y);
+                ctx.lineTo(tailX, tailY);
+                ctx.stroke();
+                // bright head
+                ctx.fillStyle = `rgba(255, 255, 255, ${0.9 * k})`;
+                ctx.beginPath();
+                ctx.arc(sh.x, sh.y, 1.6, 0, Math.PI * 2);
                 ctx.fill();
             }
+
             requestAnimationFrame(draw);
         };
         requestAnimationFrame(draw);

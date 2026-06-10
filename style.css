@@ -307,9 +307,10 @@ header {
     height: 100vh;
     min-height: 600px;
     background:
-        radial-gradient(900px circle at 15% 20%, rgba(56, 189, 248, 0.12), transparent 45%),
-        radial-gradient(700px circle at 85% 75%, rgba(14, 165, 233, 0.10), transparent 45%),
-        var(--bg);
+        radial-gradient(1100px circle at 78% 18%, rgba(99, 102, 241, 0.12), transparent 50%),
+        radial-gradient(900px circle at 12% 85%, rgba(56, 189, 248, 0.08), transparent 50%),
+        radial-gradient(1400px circle at 50% 120%, rgba(14, 165, 233, 0.06), transparent 60%),
+        linear-gradient(180deg, #080b16 0%, #0b1020 45%, #0f172a 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -318,46 +319,12 @@ header {
     overflow: hidden;
 }
 
-/* Subtle moving grid overlay */
-header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 48px 48px;
-    opacity: 0.25;
-    mask-image: radial-gradient(circle at center, black, transparent 75%);
-    -webkit-mask-image: radial-gradient(circle at center, black, transparent 75%);
-    animation: gridDrift 20s linear infinite;
-}
-
-@keyframes gridDrift {
-    from { background-position: 0 0, 0 0; }
-    to   { background-position: 48px 48px, 48px 48px; }
-}
-
-/* Cursor spotlight + particle canvas */
+/* Starfield canvas */
 #hero-canvas {
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-}
-
-.hero-spotlight {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: radial-gradient(
-        500px circle at var(--mx, 50%) var(--my, 35%),
-        rgba(56, 189, 248, 0.18),
-        rgba(56, 189, 248, 0.06) 35%,
-        transparent 60%
-    );
-    transition: background 0.12s ease-out;
 }
 
 .hero-content {
