@@ -201,36 +201,30 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.fill();
 
             if (moonReady) {
-                // clip to disc and draw the photo (center-cropped to square)
+                // clip to disc and draw the photo, cropping out the black
+                // padding around the lunar disc so it fills edge-to-edge
                 ctx.save();
                 ctx.beginPath();
                 ctx.arc(x, y, r, 0, Math.PI * 2);
                 ctx.clip();
                 const iw = moonImg.naturalWidth, ih = moonImg.naturalHeight;
                 const s = Math.min(iw, ih);
-                const sx = (iw - s) / 2, sy = (ih - s) / 2;
-                ctx.drawImage(moonImg, sx, sy, s, s, x - r, y - r, r * 2, r * 2);
-                // gentle limb darkening for depth
-                const ld = ctx.createRadialGradient(x, y, r * 0.6, x, y, r);
-                ld.addColorStop(0, "rgba(0, 0, 0, 0)");
-                ld.addColorStop(1, "rgba(4, 8, 18, 0.55)");
-                ctx.fillStyle = ld;
-                ctx.fillRect(x - r, y - r, r * 2, r * 2);
+                const inset = s * 0.06;            // trim the black border in the photo
+                const sx = (iw - s) / 2 + inset;
+                const sy = (ih - s) / 2 + inset;
+                const ss = s - inset * 2;
+                // slight overscan so the disc edge meets the clip circle cleanly
+                const o = r * 0.04;
+                ctx.drawImage(moonImg, sx, sy, ss, ss,
+                    x - r - o, y - r - o, (r + o) * 2, (r + o) * 2);
                 ctx.restore();
             } else {
                 // fallback disc until image loads
-                ctx.fillStyle = "rgba(60, 70, 92, 0.5)";
+                ctx.fillStyle = "rgba(150, 158, 175, 0.6)";
                 ctx.beginPath();
                 ctx.arc(x, y, r, 0, Math.PI * 2);
                 ctx.fill();
             }
-
-            // faint cool rim light on the lit edge
-            ctx.strokeStyle = "rgba(160, 196, 240, 0.18)";
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.arc(x, y, r - 0.5, -Math.PI * 0.9, -Math.PI * 0.1);
-            ctx.stroke();
         };
 
         let t = 0, last = performance.now();
