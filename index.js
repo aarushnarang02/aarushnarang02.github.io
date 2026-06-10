@@ -112,6 +112,93 @@ document.addEventListener("DOMContentLoaded", () => {
         if (el) sectionObserver.observe(el);
     });
 
+    // Hero: cursor spotlight + particle network
+    const header = document.getElementById("home");
+    const canvas = document.getElementById("hero-canvas");
+    if (header && canvas && !prefersReducedMotion) {
+        const ctx = canvas.getContext("2d");
+        let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+        let particles = [];
+        const mouse = { x: -9999, y: -9999 };
+
+        const resize = () => {
+            w = header.clientWidth;
+            h = header.clientHeight;
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            canvas.style.width = w + "px";
+            canvas.style.height = h + "px";
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            const count = Math.min(90, Math.floor((w * h) / 16000));
+            particles = Array.from({ length: count }, () => ({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                vx: (Math.random() - 0.5) * 0.35,
+                vy: (Math.random() - 0.5) * 0.35
+            }));
+        };
+        resize();
+        window.addEventListener("resize", resize);
+
+        // Spotlight follows cursor via CSS vars
+        header.addEventListener("pointermove", (e) => {
+            const r = header.getBoundingClientRect();
+            const px = e.clientX - r.left, py = e.clientY - r.top;
+            mouse.x = px; mouse.y = py;
+            header.style.setProperty("--mx", px + "px");
+            header.style.setProperty("--my", py + "px");
+        });
+        header.addEventListener("pointerleave", () => {
+            mouse.x = -9999; mouse.y = -9999;
+        });
+
+        const LINK_DIST = 130, MOUSE_DIST = 170;
+        const draw = () => {
+            ctx.clearRect(0, 0, w, h);
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > w) p.vx *= -1;
+                if (p.y < 0 || p.y > h) p.vy *= -1;
+
+                // links between particles
+                for (let j = i + 1; j < particles.length; j++) {
+                    const q = particles[j];
+                    const dx = p.x - q.x, dy = p.y - q.y;
+                    const d = Math.hypot(dx, dy);
+                    if (d < LINK_DIST) {
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.12 * (1 - d / LINK_DIST)})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(q.x, q.y);
+                        ctx.stroke();
+                    }
+                }
+
+                // link to cursor
+                const mdx = p.x - mouse.x, mdy = p.y - mouse.y;
+                const md = Math.hypot(mdx, mdy);
+                if (md < MOUSE_DIST) {
+                    ctx.strokeStyle = `rgba(56, 189, 248, ${0.4 * (1 - md / MOUSE_DIST)})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.stroke();
+                }
+
+                // dot
+                ctx.fillStyle = "rgba(148, 163, 184, 0.55)";
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            requestAnimationFrame(draw);
+        };
+        requestAnimationFrame(draw);
+    }
+
     // Scroll-triggered animations (Anima-style)
     if (prefersReducedMotion) return;
 
