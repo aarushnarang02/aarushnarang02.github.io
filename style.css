@@ -924,6 +924,12 @@ footer {
     transition: opacity var(--anim-duration) var(--anim-ease);
 }
 
+footer .footer-credit {
+    margin-top: 0.4rem;
+    font-size: 0.78rem;
+    opacity: 0.7;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
 

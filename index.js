@@ -122,6 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // parallax target + smoothed value
         const par = { tx: 0, ty: 0, x: 0, y: 0 };
 
+        // Real lunar near-side photo (Gregory H. Revera, CC BY-SA 3.0)
+        const moonImg = new Image();
+        let moonReady = false;
+        moonImg.onload = () => { moonReady = true; };
+        moonImg.src = "assets/images/moon.jpg";
+
         const STAR_TINTS = [
             "255, 255, 255",   // white
             "203, 225, 255",   // cool blue-white
@@ -183,30 +189,47 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         let nextShooter = 1200 + Math.random() * 2500;
 
-        const drawPlanet = () => {
+        const drawMoon = () => {
             const { x, y, r } = planet;
-            // soft outer glow
-            const glow = ctx.createRadialGradient(x, y, r * 0.6, x, y, r * 2.1);
-            glow.addColorStop(0, "rgba(56, 189, 248, 0.10)");
-            glow.addColorStop(1, "rgba(56, 189, 248, 0)");
+            // soft cool halo
+            const glow = ctx.createRadialGradient(x, y, r * 0.85, x, y, r * 1.9);
+            glow.addColorStop(0, "rgba(186, 210, 245, 0.12)");
+            glow.addColorStop(1, "rgba(186, 210, 245, 0)");
             ctx.fillStyle = glow;
             ctx.beginPath();
-            ctx.arc(x, y, r * 2.1, 0, Math.PI * 2);
+            ctx.arc(x, y, r * 1.9, 0, Math.PI * 2);
             ctx.fill();
-            // body with terminator shading (lit from upper-left)
-            const body = ctx.createRadialGradient(x - r * 0.4, y - r * 0.4, r * 0.1, x, y, r);
-            body.addColorStop(0, "rgba(70, 90, 120, 0.55)");
-            body.addColorStop(0.55, "rgba(38, 52, 78, 0.5)");
-            body.addColorStop(1, "rgba(14, 20, 36, 0.55)");
-            ctx.fillStyle = body;
-            ctx.beginPath();
-            ctx.arc(x, y, r, 0, Math.PI * 2);
-            ctx.fill();
-            // thin rim light
-            ctx.strokeStyle = "rgba(125, 211, 252, 0.25)";
+
+            if (moonReady) {
+                // clip to disc and draw the photo (center-cropped to square)
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, Math.PI * 2);
+                ctx.clip();
+                const iw = moonImg.naturalWidth, ih = moonImg.naturalHeight;
+                const s = Math.min(iw, ih);
+                const sx = (iw - s) / 2, sy = (ih - s) / 2;
+                ctx.drawImage(moonImg, sx, sy, s, s, x - r, y - r, r * 2, r * 2);
+                // gentle limb darkening for depth
+                const ld = ctx.createRadialGradient(x, y, r * 0.6, x, y, r);
+                ld.addColorStop(0, "rgba(0, 0, 0, 0)");
+                ld.addColorStop(1, "rgba(4, 8, 18, 0.55)");
+                ctx.fillStyle = ld;
+                ctx.fillRect(x - r, y - r, r * 2, r * 2);
+                ctx.restore();
+            } else {
+                // fallback disc until image loads
+                ctx.fillStyle = "rgba(60, 70, 92, 0.5)";
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // faint cool rim light on the lit edge
+            ctx.strokeStyle = "rgba(160, 196, 240, 0.18)";
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.arc(x, y, r, -Math.PI * 0.85, -Math.PI * 0.15);
+            ctx.arc(x, y, r - 0.5, -Math.PI * 0.9, -Math.PI * 0.1);
             ctx.stroke();
         };
 
@@ -221,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             ctx.clearRect(0, 0, w, h);
 
-            drawPlanet();
+            drawMoon();
 
             // stars
             for (const s of stars) {
