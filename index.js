@@ -159,9 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 };
             });
 
-            // distant planet in upper-right
-            const pr = Math.max(50, Math.min(w, h) * 0.13);
-            planet = { x: w * 0.82, y: h * 0.26, r: pr };
+            // distant moon in the upper-right corner
+            const pr = Math.max(38, Math.min(w, h) * 0.092);
+            planet = { x: w * 0.88, y: h * 0.18, r: pr };
         };
         build();
         window.addEventListener("resize", build);
