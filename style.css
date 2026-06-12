@@ -227,16 +227,37 @@ a {
     transform: translateX(-50%) scaleX(1);
 }
 
-/* Default: hide hamburger, show nav */
+/* Default: hide hamburger, show nav (shown as a floating button on mobile) */
 .hamburger {
     display: none;
-    font-size: 1.8rem;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    font-size: 1.35rem;
     cursor: pointer;
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    z-index: 999;
+    position: fixed;
+    top: 14px;
+    right: 16px;
+    z-index: 1100;
+    color: var(--heading);
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    transition: color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
 }
+
+.hamburger:active {
+    transform: scale(0.92);
+}
+
+.hamburger .fa-bars { display: inline-block; }
+.hamburger .fa-times { display: none; }
+.hamburger.clicked .fa-bars { display: none; }
+.hamburger.clicked .fa-times { display: inline-block; }
 
 
 
@@ -933,53 +954,50 @@ footer .footer-credit {
 /* Responsive Design */
 @media (max-width: 768px) {
 
-    .hamburger{
-        display: block;
-        position: fixed;
-        color: var(--light);
+    .hamburger {
+        display: flex;
     }
 
-    .hamburger .fa-times {
-        display: none;
-    }
-
-    /* When clicked: */
-    .hamburger.clicked .fa-bars {
-        display: none;
-    }
-
-    .hamburger.clicked .fa-times {
-        display: inline;
-    }
-
-    .hamburger.clicked i{
+    .hamburger.clicked {
         color: var(--accent);
+        border-color: var(--accent);
     }
 
     nav {
         position: relative;
+        background: transparent;
+        border-bottom: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
 
     nav ul {
         display: none;
         flex-direction: column;
+        align-items: center;
         background-color: rgba(15, 23, 42, 0.97);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         position: fixed;
         top: 0;
+        left: 0;
         width: 100%;
         box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        padding: 0.5rem;
+        padding: 4.5rem 0.5rem 1.25rem;
+        z-index: 1050;
     }
 
     nav ul.active {
         display: flex;
-
     }
 
     nav ul li {
-        margin: 5px 0;
+        margin: 8px 0;
+    }
+
+    nav ul li a {
+        font-size: 1.1rem;
     }
 
     .section {
