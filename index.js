@@ -159,9 +159,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 };
             });
 
-            // distant moon in the upper-right corner
-            const pr = Math.max(38, Math.min(w, h) * 0.092);
-            planet = { x: w * 0.88, y: h * 0.18, r: pr };
+            // distant moon — tucked clear of the heading (higher/smaller on mobile)
+            const isMobile = w < 600;
+            const pr = isMobile
+                ? Math.max(26, Math.min(w, h) * 0.07)
+                : Math.max(38, Math.min(w, h) * 0.092);
+            const px = isMobile ? w * 0.80 : w * 0.88;
+            const py = isMobile ? h * 0.085 : h * 0.18;
+            planet = { x: px, y: py, r: pr };
         };
         build();
         window.addEventListener("resize", build);
@@ -172,6 +177,14 @@ document.addEventListener("DOMContentLoaded", () => {
             par.ty = (e.clientY - r.top) / h - 0.5;
         });
         header.addEventListener("pointerleave", () => { par.tx = 0; par.ty = 0; });
+
+        // Device-tilt parallax for touch devices (where supported/granted)
+        const clamp = (v) => Math.max(-0.5, Math.min(0.5, v));
+        window.addEventListener("deviceorientation", (e) => {
+            if (e.gamma == null || e.beta == null) return;
+            par.tx = clamp(e.gamma / 35);          // left/right tilt
+            par.ty = clamp((e.beta - 45) / 35);    // front/back tilt
+        }, true);
 
         const spawnShooter = () => {
             const edge = Math.random();
